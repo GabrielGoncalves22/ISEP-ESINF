@@ -1,0 +1,167 @@
+@startuml
+left to right direction
+
+package model {
+    abstract Area {
+        -itemAVL : AVL<Item>
+        +Area()
+        +{abstract}getAreaIdentifier() : String
+        +getItemAVL() : AVL<Item>
+        +findNodeItemAVL(currentItem : Item) : BST.Node<Item>
+        +insertNewItemInAVL(currentItem : Item, currentElement : Element, currentYear: Year)
+        +hasItemElementYear(currentItem : Item, currentElement : Element, currentYear: Year) : boolean
+        +hashCode() : int
+        +equals(obj : Object) : boolean
+        +compareTo(otherArea : Area) : int
+    }
+
+    class AreaCode {
+        -areaCode : String
+        +AreaCode(areaCode : String)
+        +getAreaIdentifier() : String
+    }
+
+    class AreaCodeM49 {
+        -codeM49 : String
+        +AreaCodeM49(codeM49 : String)
+        +getAreaIdentifier() : String
+    }
+
+    class AreaName {
+        -areaName : String
+        +AreaName(areaName : String)
+        +getAreaIdentifier() : String
+    }
+
+    abstract Item {
+        -elementAVL : AVL<Element>
+        +Item()
+        +{abstract}getItemIdentifier() : String
+        +getElementAVL() : AVL<Element>
+        +findNodeElementAVL(currentElement : Element) : BST.Node<Element>
+        +insertNewElementInAVL(currentElement : Element, currentYear : Year)
+        +equals(obj : Object) : boolean
+        +compareTo(otherItem : Item) : int
+    }
+
+    class ItemCode {
+        -itemCode : String
+        +ItemCode(itemCode : String)
+        +getItemIdentifier() : String
+    }
+
+    class ItemCodeCPC {
+        -itemCPC : String
+        +ItemCodeCPC(String itemCodeCPC)
+        +getItemIdentifier() : String
+    }
+
+    class ItemName {
+        -itemName : String
+        +ItemName(String itemName)
+        +getItemIdentifier() : String
+    }
+
+    abstract Element {
+        -yearAVL : AVL<Year>
+        +Element()
+        +{abstract}getElementIdentifier() : String
+        +getYearAVL() : AVL<Year>
+        +findNodeYearAVL(currentYear : Year) : BST.Node<Year>
+        +insertNewYearInAvl(year : Year)
+        +getMaxYear() : Year
+        +equals(obj : Object) : boolean
+        +compareTo(otherElement : Element) : int
+    }
+
+    class ElementCode {
+        -elementCode : String
+        +ElementCode(elementCode : String)
+        +getElementIdentifier() : String
+    }
+
+    class ElementName {
+        -elementName : String
+        +ElementName(elementName : String)
+        +getElementIdentifier() : String
+    }
+
+    class Year {
+        -year : int
+        -value : Value
+        +Year(year : int)
+        +Year(year : int, value : Value)
+        +getValue() : Value
+        +getYear() : int
+        +equals(obj : Object) : boolean
+        +compareTo(otherYear : Year) : int
+    }
+
+    class Value {
+        -unit : String
+        -value : long
+        -flag : char
+        -flagDescription : String
+        +Value(unit : String, value : long, flag : char)
+        +Value(unit : String, value : long, flag : char, flagDescription : String)
+        +Value(value : long)
+        +getValue() : long
+        +getFlag() : char
+        +setFlagDescription(flagDescription : String)
+        +equals(obj : Object) : boolean
+        +compareTo(otherValue : Value) : int
+    }
+}
+
+package production {
+    class Production {
+        -allDataAVL : AVL<Area>
+        -data2DTree : KDTree<Area>
+        +Production()
+        +findNodeAreaAVL(currentArea : Area)
+        +insertNewAreaInAVL(currentArea : Area, currentItem : Item, currentElement : Element, currentYear : Year)
+        +setData2DTree(data2DTree : KDTree<Area>)
+        +findValue(currentArea : Area, currentItem : Item, currentElement : Element, currentYear : Year) : Value
+        +agregatedAreaItemElement(passedArea : Area, firstYear : Year, lastYear : Year) : List<AgregatedDataStructure>
+        -sortByValue(Map<K, Value> map) : ArrayList<K>
+        -areasWithTheHighestValue(receivedItem : Item, receivedElement : Element) : Map<Area, Value>
+        +selectNAreasWithTheHighestValue(receivedItem : Item, receivedElement : Element, receivedNumber : int) : ArrayList<Area>
+        +nearestArea(latitude : double, longitude : double, currentItem : Item, currentElement : Element, currentYear : Year) : KDTree.Node2D<Area>
+        +findAllAreasByItemElementYear(currentItem : Item, currentElement : Element, currentYear : Year) : List<Area>
+        +findAllValidNode2D(validAreas : List<Area>) : List<KDTree.Node2D<Area>>
+    }
+}
+
+package dataStructure {
+    class AVL {
+    }
+
+    class BST {
+    }
+
+    class KDTree {
+    }
+}
+
+production ..> model
+production ..> dataStructure
+model ..> dataStructure
+
+Area <|- AreaCode
+Area <|- AreaCodeM49
+Area <|- AreaName
+
+Item <|- ItemCode
+Item <|- ItemCodeCPC
+Item <|- ItemName
+
+Element <|- ElementCode
+Element <|- ElementName
+
+'Composition
+Area "1" --* "*" Item
+Item "1" --* "*" Element
+Element "1" --* "*" Year
+Year "1" --* "1" Value
+
+@enduml

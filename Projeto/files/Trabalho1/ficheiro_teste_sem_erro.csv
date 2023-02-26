@@ -1,0 +1,5 @@
+﻿Domain Code,Domain,Trabalho1.Area Code (FAO),Trabalho1.Area,Element Code,Element,Trabalho1.Item Code (FAO),Trabalho1.Item,Trabalho1.Year Code,Trabalho1.Year,Unit,Trabalho1.Value,Flag,Flag Description
+QCL,Crops ad livestock products,2,Afghanistan,5510,Trabalho1.Production,515,Apples,1961,1961,tonnes,15100,*,Unofficial figure
+QCL,Crops and livestock products,2,Afghanistan,5510,Trabalho1.Production,515,Apples,1962,1962,tonnes,15100,F,FAO estimate
+QCL,Crops and livestock products,3,Albania,5510,Trabalho1.Production,515,Apples,1961,1961,tonnes,10004,,Official data
+QCL,Crops and livestock products,3,Albania,5510,Trabalho1.Production,515,Apples,1962,1962,tonnes,8039,,Official data

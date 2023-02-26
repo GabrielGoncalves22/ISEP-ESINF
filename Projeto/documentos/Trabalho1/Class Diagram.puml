@@ -1,0 +1,46 @@
+@startuml
+
+class Area {
+    -country
+    +getCountry()
+    +equals(obj)
+    +hashCode()
+    +compareTo(otherArea)
+}
+
+class Item {
+    -name
+    -years
+    +getName()
+    +getMapYear()
+    +addYear(year)
+    +equals(obj)
+    +hashCode()
+    +compareTo(otherItem)
+    +getTotalQuantity()
+    +getMaximumNumberConsecutiveYears()
+    +getBiggestDifferenceQuantity()
+    +getYearWithQuantityGreaterOrEqual(quantity)
+}
+
+class Year {
+    -productionYear
+    -value
+    +getProductionYear()
+    +getProductionYear()
+    +equals(obj)
+    +compareTo(otherYear)
+}
+
+class Value {
+    -productionQuantity
+    +getProductionQuantity()
+}
+
+
+'Composition
+Area "1" --* "*" Item
+Item "1" --* "*" Year
+Year "1" --* "1" Value
+
+@enduml
